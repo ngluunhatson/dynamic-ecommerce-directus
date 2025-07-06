@@ -4,7 +4,7 @@
     "sqlite3": "^5.1.6",
     "tedious": "^16.4.0"
   },
-  "description": "Dynamic E-commerce Backend built on top of the directus stack",
+  "description": "Dynamic E-commerce Backend built with Directus v11.9.2",
   "name": "dynamic-ecommerce-directus",
   "scripts": {
     "deploy": "fly deploy --remote-only",
