@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "directus": "^11.9.2",
+    "sqlite3": "^5.1.6",
+    "tedious": "^16.4.0"
+  },
+  "description": "Dynamic E-commerce Backend built on top of the directus stack",
+  "name": "dynamic-ecommerce-directus",
+  "scripts": {
+    "deploy": "fly deploy --remote-only",
+    "start": "npx directus start"
+  },
+  "version": "1.0.0"
+}
