@@ -1,72 +1,69 @@
-# fly.toml app configuration file generated for dynamic-ecommerce-directus on 2025-04-05T01:04:48+07:00
-#
-# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
-#
+app = "fly-directus-twilight-dream-3768"
+primary_region = "iad"
 
-app = 'dynamic-ecommerce-directus'
-primary_region = 'iad'
-
-[experimental]
-  cmd = ['start.sh']
-  entrypoint = ['sh']
-  auto_rollback = true
-
-[build]
+[checks.healthCheck]
+grace_period = "1m0s"
+interval = "30s"
+method = "get"
+path = "/server/health"
+port = 8_055
+timeout = "10s"
+type = "http"
 
 [env]
-  ASSETS_TRANSFORM_MAX_CONCURRENT = '10'
-  CORS_ENABLED = 'true'
-  CORS_ORIGIN = 'true'
-  DB_CLIENT = 'sqlite3'
-  DB_FILENAME = '/data/database/data.db'
-  FLY_PRIMARY_REGION = 'iad'
-  PORT = '8055'
-  STORAGE_LOCAL_DRIVER = 'local'
-  STORAGE_LOCAL_ROOT = '/data/uploads'
-  STORAGE_LOCATIONS = 'local'
+ASSETS_TRANSFORM_MAX_CONCURRENT = "10"
+CORS_ENABLED = "true"
+CORS_ORIGIN = "true"
+DB_CLIENT = "sqlite3"
+DB_FILENAME = "/data/database/data.db"
+FLY_PRIMARY_REGION = "iad"
+PORT = "8055"
+STORAGE_LOCAL_DRIVER = "local"
+STORAGE_LOCAL_ROOT = "/data/uploads"
+STORAGE_LOCATIONS = "local"
 
-[[mounts]]
-  source = 'directus_data'
-  destination = '/data'
+[experimental]
+auto_rollback = true
+cmd = ["start.sh"]
+entrypoint = ["sh"]
+
+[experimental.attached]
+secrets = {}
 
 [http_service]
-  internal_port = 3000
-  force_https = true
-  auto_stop_machines = 'stop'
-  auto_start_machines = true
-  min_machines_running = 0
-  processes = ['app']
+auto_start_machines = true
+auto_stop_machines = "suspend"
+force_https = true
+internal_port = 8_055
+min_machines_running = 0
+processes = ["app"]
+
+[[mounts]]
+destination = "/data"
+source = "directus_data"
 
 [[services]]
-  protocol = 'tcp'
-  internal_port = 8055
-  processes = ['app']
+internal_port = 8_055
+auto_start_machines = true
+auto_stop_machines = "suspend"
+processes = ["app"]
+protocol = "tcp"
 
-  [[services.ports]]
-    port = 80
-    handlers = ['http']
-    force_https = true
+[services.concurrency]
+hard_limit = 100
+soft_limit = 50
+type = "requests"
 
-  [[services.ports]]
-    port = 443
-    handlers = ['tls', 'http']
+[[services.ports]]
+force_https = true
+handlers = ["http"]
+port = 80
 
-  [services.concurrency]
-    type = 'requests'
-    hard_limit = 100
-    soft_limit = 50
-
-[checks]
-  [checks.healthCheck]
-    port = 8055
-    type = 'http'
-    interval = '30s'
-    timeout = '10s'
-    grace_period = '1m0s'
-    method = 'get'
-    path = '/server/health'
+[[services.ports]]
+handlers = ["tls", "http"]
+port = 443
 
 [[vm]]
-  memory = '1gb'
-  cpu_kind = 'shared'
-  cpus = 1
+cpu_kind = "shared"
+cpus = 1
+memory = "1gb"
