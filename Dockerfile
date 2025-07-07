@@ -1,10 +1,10 @@
 # base node image
-FROM nikolaik/python-nodejs:python3.13-nodejs22-slim as base
+FROM node:24.3.0-alpine3.22 as base
 
 # set for base and all layer that inherit from it
 ENV NODE_ENV production
 
-RUN apt-get update && apt-get install -y openssl sqlite3 make
+RUN apt-get update && apt-get install -y sqlite3 make python3
 
 # Install all node_modules, including dev dependencies
 FROM base as deps
