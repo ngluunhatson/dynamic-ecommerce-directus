@@ -15,7 +15,7 @@ ADD package.json .npmrc ./
 #Install Python
 # RUN apt-get install -y python3 make g++
 # # Set environment variable for Python
-# ENV PYTHON /usr/bin/python3
+ENV PYTHON /usr/bin/python3
 RUN npm install --production=false
 
 # Setup production node_modules
