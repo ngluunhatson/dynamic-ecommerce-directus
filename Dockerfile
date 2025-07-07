@@ -1,5 +1,5 @@
 # base node image
-FROM node:24.3-bullseye-slim as base
+FROM python3.13-nodejs24-slim as base
 
 # set for base and all layer that inherit from it
 ENV NODE_ENV production
@@ -13,9 +13,9 @@ WORKDIR /directus
 
 ADD package.json .npmrc ./
 #Install Python
-RUN apt-get install -y python3 make g++
-# Set environment variable for Python
-ENV PYTHON /usr/bin/python3
+# RUN apt-get install -y python3 make g++
+# # Set environment variable for Python
+# ENV PYTHON /usr/bin/python3
 RUN npm install --production=false
 
 # Setup production node_modules
