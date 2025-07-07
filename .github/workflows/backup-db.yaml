@@ -7,6 +7,7 @@ jobs:
   backup:
     name: Backup
     runs-on: ubuntu-latest
+    environment: FLY_API
     steps:
       - name: Setup Flyctl
         uses: superfly/flyctl-actions/setup-flyctl@master

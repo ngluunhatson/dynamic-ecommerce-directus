@@ -1,5 +1,5 @@
 # base node image
-FROM node:22-bullseye-slim as base
+FROM node:22.17.0-bullseye-slim as base
 
 
 
