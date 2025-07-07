@@ -1,11 +1,10 @@
 # base node image
-FROM node:20.19.3-bullseye-slim as base
+FROM node:24.3-bullseye-slim as base
 
 # set for base and all layer that inherit from it
 ENV NODE_ENV production
 
 RUN apt-get update && apt-get install -y openssl sqlite3
-
 
 # Install all node_modules, including dev dependencies
 FROM base as deps
@@ -14,9 +13,9 @@ WORKDIR /directus
 
 ADD package.json .npmrc ./
 #Install Python
-RUN apt-get install --assume-yes --fix-missing python3 make g++
-# Set environment variable for Python
-ENV PYTHON /usr/bin/python3
+# RUN apt-get install --assume-yes --fix-missing python3 make g++
+# # Set environment variable for Python
+# ENV PYTHON /usr/bin/python3
 RUN npm install --production=false
 
 # Setup production node_modules
