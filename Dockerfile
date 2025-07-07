@@ -4,7 +4,7 @@ FROM nikolaik/python-nodejs:python3.13-nodejs22-slim as base
 # set for base and all layer that inherit from it
 ENV NODE_ENV production
 
-RUN apt-get update && apt-get install -y openssl sqlite3
+RUN apt-get update && apt-get install -y openssl sqlite3 make
 
 # Install all node_modules, including dev dependencies
 FROM base as deps
@@ -13,9 +13,11 @@ WORKDIR /directus
 
 ADD package.json .npmrc ./
 #Install Python
+
+RUN apt-get update && apt-get install -y make g++
 # RUN apt-get install -y python3 make g++
 # # Set environment variable for Python
-ENV PYTHON /usr/local/bin/python3
+# ENV PYTHON /usr/local/bin/python3
 RUN npm install --production=false
 
 # Setup production node_modules
