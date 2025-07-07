@@ -13,9 +13,9 @@ WORKDIR /directus
 
 ADD package.json .npmrc ./
 #Install Python
-# RUN apt-get install --assume-yes --fix-missing python3 make g++
-# # Set environment variable for Python
-# ENV PYTHON /usr/bin/python3
+RUN apt-get update && apt-get install -y python3
+# Set environment variable for Python
+ENV PYTHON /usr/bin/python3
 RUN npm install --production=false
 
 # Setup production node_modules
