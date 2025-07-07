@@ -1,5 +1,5 @@
 # base node image
-FROM python3.13-nodejs24-slim as base
+FROM nikolaik/python-nodejs:python3.13-nodejs22-slim as base
 
 # set for base and all layer that inherit from it
 ENV NODE_ENV production
