@@ -4,7 +4,7 @@ FROM node:24.3.0-bullseye-slim as base
 # set for base and all layer that inherit from it
 ENV NODE_ENV production
 
-RUN apt-get update && apt-get install -y sqlite3 make python3
+RUN apt-get update && apt-get install -y openssl sqlite3 make python3 g++
 
 # Install all node_modules, including dev dependencies
 FROM base as deps
