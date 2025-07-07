@@ -1,5 +1,5 @@
 # base node image
-FROM node:22.17.0-bullseye-slim as base
+FROM node:24.3-bullseye-slim as base
 
 
 
@@ -16,7 +16,7 @@ WORKDIR /directus
 
 ADD package.json .npmrc ./
 #Install Python
-RUN apt-get install -y python3 make g++
+RUN apt-get install --assume-yes --fix-missing python3 make g++
 # Set environment variable for Python
 ENV PYTHON /usr/bin/python3
 RUN npm install --production=false
